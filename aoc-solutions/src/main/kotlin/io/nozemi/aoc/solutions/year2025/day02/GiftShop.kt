@@ -17,27 +17,48 @@ class GiftShop : AbstractPuzzle<List<LongRange>>() {
     }
 
     override val solutions: PuzzleSolutions<List<LongRange>> = listOf(
-        ::part1
+        ::part1,
+        ::part2
     )
 
-    fun part1(input: List<LongRange>): Long {
-        val numbers = mutableListOf<Long>()
+    private fun stringNumbers(input: List<LongRange>) =
+        input.map {
+            it.toList()
+        }.flatten()
+            .map {
+                it.toString()
+            }
 
-        input.forEach { range ->
-            numbers.addAll(range.toList())
+    private fun findInvalidIds(ids: List<LongRange>, vararg conditions: (number: String) -> Boolean): List<Long> {
+        val invalidIds = mutableListOf<Long>()
+        val stringNumbers = stringNumbers(ids)
+        stringNumbers.forEach { number ->
+            if (conditions.any { it(number)})
+                invalidIds.add(number.toLong())
         }
 
-        val invalidIds = mutableListOf<Long>()
-        val stringNumbers = numbers.map { it.toString() }
-        stringNumbers.forEach { number ->
+        return invalidIds
+    }
+
+    private fun part1(input: List<LongRange>): Long {
+        val invalidIds = findInvalidIds(input, {number ->
             if (number.length % 2 == 0) {
                 val part1 = number.take(number.length / 2)
                 val part2 = number.takeLast(number.length / 2)
 
-                if (part1 == part2)
-                    invalidIds.add(number.toLong())
+                return@findInvalidIds part1 == part2
             }
-        }
+
+            return@findInvalidIds false
+        })
+
+        return invalidIds.sum()
+    }
+
+    private fun part2(input: List<LongRange>): Long {
+        val invalidIds = findInvalidIds(input, {number ->
+            return@findInvalidIds number.matches("([0-9]+)\\1+".toRegex())
+        })
 
         return invalidIds.sum()
     }
