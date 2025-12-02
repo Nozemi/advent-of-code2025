@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %C:%L} - %m%n" disableAnsi="false" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef level="all" ref="Console"/>
+        </Root>
+        <Logger name="io.nozemi" level="debug" additivity="true"/>
+    </Loggers>
+</Configuration>

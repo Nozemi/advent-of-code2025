@@ -2,20 +2,21 @@ plugins {
     kotlin("jvm") version "2.2.20"
 }
 
-group = "io.nozemi"
-version = "1.0-SNAPSHOT"
+allprojects {
+    apply(plugin = "kotlin")
 
-repositories {
-    mavenCentral()
-}
+    group = "io.nozemi"
+    version = "1.0-SNAPSHOT"
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(23)
+    kotlin {
+        jvmToolchain(23)
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+    }
 }
