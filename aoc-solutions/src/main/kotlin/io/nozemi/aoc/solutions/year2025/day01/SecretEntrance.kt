@@ -1,12 +1,17 @@
 package io.nozemi.aoc.solutions.year2025.day01
 
 import io.nozemi.aoc.library.puzzle.AbstractPuzzle
+import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import java.util.stream.Stream
 
-class SecretEntrance : AbstractPuzzle<List<DialTurn>>() {
-    override val parser: (input: Stream<String>) -> List<DialTurn> = { input ->
-        input.map {
+class SecretEntrance(
+    override val parser: AbstractPuzzleParser<List<DialTurn>> = SecretEntranceParser()
+) : AbstractPuzzle<List<DialTurn>>() {
+
+    private class SecretEntranceParser : AbstractPuzzleParser<List<DialTurn>>() {
+
+        override fun parse(input: Stream<String>): List<DialTurn> = input.map {
             DialTurn(it[0], it.substring(1).toInt())
         }.toList()
     }

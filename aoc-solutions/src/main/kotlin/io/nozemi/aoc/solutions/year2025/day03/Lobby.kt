@@ -1,34 +1,25 @@
 package io.nozemi.aoc.solutions.year2025.day03
 
 import io.nozemi.aoc.library.puzzle.AbstractPuzzle
+import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import java.util.stream.Stream
 
-class Lobby : AbstractPuzzle<List<List<Int>>>() {
+class Lobby(
+    override val parser: AbstractPuzzleParser<List<List<Int>>> = LobbyParser()
+) : AbstractPuzzle<List<List<Int>>>() {
 
-    override val parser: (input: Stream<String>) -> List<List<Int>> = { input ->
-        input.map { batteryBank ->
-            batteryBank.map { battery -> battery.digitToInt() }.toList()
-        }.toList()
+    private class LobbyParser : AbstractPuzzleParser<List<List<Int>>>() {
+        override fun parse(input: Stream<String>): List<List<Int>> =
+            input.map { batteryBank ->
+                batteryBank.map { battery -> battery.digitToInt() }.toList()
+            }.toList()
     }
 
     override val solutions: PuzzleSolutions<List<List<Int>>> = listOf(
         ::part1,
         ::part2
     )
-
-    private fun List<Int>.highestJoltage(): Int {
-        var highestJoltage = 0
-        this.forEachIndexed { i1, b1 ->
-            this.subList(i1 + 1, this.size).forEach { b2 ->
-                val current = "$b1$b2".toInt()
-                if (current > highestJoltage)
-                    highestJoltage = current
-            }
-        }
-
-        return highestJoltage
-    }
 
     private fun List<Int>.highestJoltage(batteries: Int): List<Int> {
         val joltage = mutableListOf<Int>()

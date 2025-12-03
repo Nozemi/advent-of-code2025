@@ -25,7 +25,7 @@ abstract class AbstractPuzzle<T> {
     private val year: Int
     private val day: Int
 
-    protected abstract val parser: (input: Stream<String>) -> T
+    protected abstract val parser: AbstractPuzzleParser<T>
     abstract val solutions: PuzzleSolutions<T>
 
     init {
@@ -88,7 +88,7 @@ abstract class AbstractPuzzle<T> {
             }
         }
 
-        ParsedInput(title, expectedAnswers, parser(Files.lines(file).skip(linesToSkip)))
+        ParsedInput(title, expectedAnswers, parser.parse(Files.lines(file).skip(linesToSkip)))
     }
 
     fun solve() {
