@@ -5,23 +5,31 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import java.util.stream.Stream
 
-class Lobby(
-    override val parser: AbstractPuzzleParser<List<List<Int>>> = LobbyParser()
-) : AbstractPuzzle<List<List<Int>>>() {
+typealias BatteryBank = List<Int>
 
-    private class LobbyParser : AbstractPuzzleParser<List<List<Int>>>() {
-        override fun parse(input: Stream<String>): List<List<Int>> =
+class Lobby(
+    override val parser: AbstractPuzzleParser<List<BatteryBank>> = LobbyParser()
+) : AbstractPuzzle<List<BatteryBank>>() {
+
+    private class LobbyParser : AbstractPuzzleParser<List<BatteryBank>>() {
+        override fun parse(input: Stream<String>): List<BatteryBank> =
             input.map { batteryBank ->
                 batteryBank.map { battery -> battery.digitToInt() }.toList()
             }.toList()
     }
 
-    override val solutions: PuzzleSolutions<List<List<Int>>> = listOf(
+    override val solutions: PuzzleSolutions<List<BatteryBank>> = listOf(
         ::part1,
         ::part2
     )
 
-    private fun List<Int>.highestJoltage(batteries: Int): List<Int> {
+    private fun part1(batteryBanks: List<BatteryBank>): Long =
+        batteryBanks.totalJoltage(2)
+
+    private fun part2(batteryBanks: List<BatteryBank>): Long =
+        batteryBanks.totalJoltage(12)
+
+    private fun BatteryBank.highestJoltage(batteries: Int): Long {
         val joltage = mutableListOf<Int>()
         var removeCount = this.size - batteries
 
@@ -33,14 +41,11 @@ class Lobby(
             joltage.add(it)
         }
 
-        return joltage.take(batteries)
+        return joltage.take(batteries).joinToString("").toLong()
     }
 
-    private fun part1(batteryBanks: List<List<Int>>): Long =
-        batteryBanks.map { it.highestJoltage(2) }.sumOf { it.joinToString("").toLong() }
-
-    private fun part2(batteryBanks: List<List<Int>>): Long =
-        batteryBanks.map { it.highestJoltage(12) }.sumOf { it.joinToString("").toLong() }
+    private fun List<BatteryBank>.totalJoltage(batteries: Int): Long =
+        this.sumOf { it.highestJoltage(batteries) }
 }
 
 fun main() {
