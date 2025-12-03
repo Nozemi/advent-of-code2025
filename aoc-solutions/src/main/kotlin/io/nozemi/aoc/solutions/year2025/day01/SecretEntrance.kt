@@ -4,8 +4,7 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzle
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import java.util.stream.Stream
-import kotlin.math.floor
-import kotlin.math.max
+import kotlin.math.abs
 
 class SecretEntrance(
     override val parser: AbstractPuzzleParser<List<DialTurn>> = SecretEntranceParser()
@@ -28,11 +27,7 @@ class SecretEntrance(
         var stopsAt0 = 0L
 
         input.forEach {
-            when (it.direction) {
-                'R' -> current += it.clicks
-                'L' -> current -= it.clicks
-            }
-
+            current += it.distance
             current %= 100
 
             if (current == 0L)
@@ -44,24 +39,23 @@ class SecretEntrance(
 
     private fun part2(input: List<DialTurn>): Long {
         var current = 50L
-        var stopsAt0 = 0L
+        var stopsAt0 = input.sumOf { it.rotations }
 
-        input.forEach { r ->
-            val revs = r.clicks / 100
-            var clicks = r.clicks / max(1, revs)
-            stopsAt0 += revs
+        input.forEach {
+            val original = current
 
-            while (clicks-- > 0) {
-                current %= 100
+            current += it.distance
 
-                if (current == 0L)
-                    stopsAt0++
+            if (original != 0L && current !in 0..100)
+                stopsAt0++
 
-                when (r.direction) {
-                    'R' -> current++
-                    'L' -> current--
-                }
-            }
+            if (current < 0)
+                current += 100
+
+            current %= 100
+
+            if (current == 0L)
+                stopsAt0++
         }
 
         return stopsAt0
@@ -71,7 +65,17 @@ class SecretEntrance(
 data class DialTurn(
     val direction: Char,
     val clicks: Long
-)
+) {
+    val distance get() = with(clicks % 100) {
+        when (direction) {
+            'L' -> -this
+            else -> this
+        }
+    }
+    val rotations get(): Long = with(clicks - abs(distance)) {
+        this / 100
+    }
+}
 
 fun main() {
     SecretEntrance().solve()
