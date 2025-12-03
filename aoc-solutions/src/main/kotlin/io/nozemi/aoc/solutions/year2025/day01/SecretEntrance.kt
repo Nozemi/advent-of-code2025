@@ -47,11 +47,9 @@ class SecretEntrance(
         var stopsAt0 = 0L
 
         input.forEach { r ->
-            var clicks = r.clicks
-            while (clicks - 100 > 100) {
-                clicks -= 100
-                stopsAt0++
-            }
+            val revs = r.clicks / 100
+            var clicks = r.clicks / max(1, revs)
+            stopsAt0 += revs
 
             while (clicks-- > 0) {
                 current %= 100
@@ -76,24 +74,5 @@ data class DialTurn(
 )
 
 fun main() {
-    SecretEntrance().solve(
-        listOf(
-            "suic",
-            //"nozemi"
-        )
-    )
-
-    //println(30_000_000 / 299_999)
+    SecretEntrance().solve()
 }
-
-/*
-Revs: 299999 | 30000000
-Revs: 479999 | 48000000
-Revs: 49999 | 5000000
-Revs: 599999 | 60000000
-Revs: 549999 | 55000000
-Revs: 9999 | 1000000
-Revs: 989999 | 99000000
-Revs: 139999 | 14000000
-Revs: 819999 | 82000000
- */
