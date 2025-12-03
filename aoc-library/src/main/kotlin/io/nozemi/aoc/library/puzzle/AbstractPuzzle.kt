@@ -64,35 +64,45 @@ abstract class AbstractPuzzle<T> {
         return matching?.map { it.path } ?: emptyList()
     }
 
-    fun loadInput(): List<ParsedInput<T>> = findInput().map {
-        val file = Path(it)
-        var title = file.name
-        val expectedAnswers = mutableListOf<Long>()
-
-        val linesToSkip: Long
-        Files.lines(file).use { lines ->
-            lines.takeWhile { line ->
-                line.startsWith("TITLE:") || line.startsWith("PART ")
-            }.use { result ->
-                val properties = result.toList()
-
-                linesToSkip = properties.size.toLong()
-
-                properties.forEach { line ->
-                    if (line.startsWith("TITLE:"))
-                        title = line.replaceFirst("TITLE:", "").trim()
-
-                    if (line.startsWith("PART "))
-                        expectedAnswers.add(line.replaceFirst("PART \\d+:".toRegex(), "").trim().toLong())
+    fun loadInput(ignoredPatterns: List<String> = listOf()): List<ParsedInput<T>> =
+        findInput()
+            .filter {
+                !ignoredPatterns.any { ignore ->
+                    it == ignore
+                            || it.startsWith(ignore)
+                            || it.endsWith(ignore)
+                            || it.contains(ignore)
                 }
             }
-        }
+            .map {
+                val file = Path(it)
+                var title = file.name
+                val expectedAnswers = mutableListOf<Long>()
 
-        ParsedInput(title, expectedAnswers, parser.parse(Files.lines(file).skip(linesToSkip)))
-    }
+                val linesToSkip: Long
+                Files.lines(file).use { lines ->
+                    lines.takeWhile { line ->
+                        line.startsWith("TITLE:") || line.startsWith("PART ")
+                    }.use { result ->
+                        val properties = result.toList()
 
-    fun solve() {
-        val parsedInputs = loadInput()
+                        linesToSkip = properties.size.toLong()
+
+                        properties.forEach { line ->
+                            if (line.startsWith("TITLE:"))
+                                title = line.replaceFirst("TITLE:", "").trim()
+
+                            if (line.startsWith("PART "))
+                                expectedAnswers.add(line.replaceFirst("PART \\d+:".toRegex(), "").trim().toLong())
+                        }
+                    }
+                }
+
+                ParsedInput(title, expectedAnswers, parser.parse(Files.lines(file).skip(linesToSkip)))
+            }
+
+    fun solve(ignoredPatterns: List<String> = listOf()) {
+        val parsedInputs = loadInput(ignoredPatterns)
 
         println("")
         val titleLine = "==   Solving $puzzleName   =="
@@ -111,12 +121,18 @@ abstract class AbstractPuzzle<T> {
             input.answers.forEach { (part, answer) ->
                 val expected = input.expectedAnswers.getOrNull(part)
                 val validAnswer = when (expected) {
-                    null -> ANSI_YELLOW
-                    answer.value -> ANSI_GREEN
-                    else -> ANSI_RED
+                    null -> Pair(ANSI_YELLOW, false)
+                    answer.value -> Pair(ANSI_GREEN, false)
+                    else -> Pair(ANSI_RED, true)
                 }
 
-                println("- ${ANSI_BOLD}Part ${part + 1}:$ANSI_RESET $validAnswer${answer.value}$ANSI_RESET (${answer.duration})")
+                val (color, failed) = validAnswer
+
+                var output = "$color${answer.value}$ANSI_RESET"
+                if (failed)
+                    output += " (Expected: $ANSI_GREEN${expected}$ANSI_RESET)"
+
+                println("- ${ANSI_BOLD}Part ${part + 1}:$ANSI_RESET $output (${answer.duration})")
             }
             println("")
         }
