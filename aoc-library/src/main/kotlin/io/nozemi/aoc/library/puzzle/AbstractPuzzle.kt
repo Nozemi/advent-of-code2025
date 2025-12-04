@@ -1,10 +1,10 @@
 package io.nozemi.aoc.library.puzzle
 
 import com.github.michaelbull.logging.InlineLogger
+import com.github.michaelbull.result.onSuccess
 import io.nozemi.aoc.library.cli.*
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.stream.Stream
 import kotlin.collections.forEachIndexed
 import kotlin.io.path.Path
 import kotlin.io.path.exists
@@ -12,6 +12,8 @@ import kotlin.io.path.isDirectory
 import kotlin.io.path.name
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
+
+val inputDownloader = InputDownloader()
 
 abstract class AbstractPuzzle<T> {
     val logger = InlineLogger(AbstractPuzzle::class)
@@ -38,11 +40,11 @@ abstract class AbstractPuzzle<T> {
         year = dayAndYear.groupValues[1].toInt()
         day = dayAndYear.groupValues[2].toInt()
 
-        inputFilePath = Path.of("./data/input/${year}")
+        inputFilePath = Path.of("./data/inputs/${year}")
     }
 
     private fun findInput(): List<String> {
-        val dir = Path("./data")
+        val dir = Path("./data").resolve("inputs").resolve("year$year")
 
         logger.debug { "Finding input for day '$day' in: $dir" }
 
@@ -64,16 +66,22 @@ abstract class AbstractPuzzle<T> {
         return matching?.map { it.path } ?: emptyList()
     }
 
-    fun loadInput(ignoredPatterns: List<String> = listOf()): List<ParsedInput<T>> =
-        findInput()
-            .filter {
-                !ignoredPatterns.any { ignore ->
-                    it == ignore
-                            || it.startsWith(ignore)
-                            || it.endsWith(ignore)
-                            || it.contains(ignore)
-                }
+    fun loadInput(ignoredPatterns: List<String> = listOf()): List<ParsedInput<T>> {
+        val input = findInput()
+        if (input.none { !it.contains("example") }) {
+            inputDownloader.downloadInput(year, day).onSuccess {
+                return loadInput(ignoredPatterns)
             }
+        }
+
+        return input.filter {
+            !ignoredPatterns.any { ignore ->
+                it == ignore
+                        || it.startsWith(ignore)
+                        || it.endsWith(ignore)
+                        || it.contains(ignore)
+            }
+        }
             .map {
                 val file = Path(it)
                 var title = file.name
@@ -100,6 +108,7 @@ abstract class AbstractPuzzle<T> {
 
                 ParsedInput(title, expectedAnswers, parser.parse(Files.lines(file).skip(linesToSkip)))
             }
+    }
 
     fun solve(ignoredPatterns: List<String> = listOf()) {
         val parsedInputs = loadInput(ignoredPatterns)

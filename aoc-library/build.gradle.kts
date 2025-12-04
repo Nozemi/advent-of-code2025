@@ -3,7 +3,7 @@ dependencies {
     dependencies {
         testImplementation(kotlin("test"))
 
-        implementation("org.jetbrains:annotations:26.0.2")
+        implementation("io.github.classgraph:classgraph:4.8.184")
 
         implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
 

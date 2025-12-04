@@ -20,3 +20,9 @@ allprojects {
         useJUnitPlatform()
     }
 }
+
+subprojects {
+    dependencies {
+        implementation("com.michael-bull.kotlin-result:kotlin-result:2.1.0")
+    }
+}
