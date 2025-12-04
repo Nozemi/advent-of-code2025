@@ -14,15 +14,37 @@ class PrintingDepartment(
 
 
     override val solutions: PuzzleSolutions<VariableCharMatrix> = listOf(
-        ::part1
+        ::part1,
+        ::part2
     )
 
-    private fun part1(matrix: VariableCharMatrix): Long {
-        val accessibleRolls = mutableListOf<Vector2>()
+    private fun part1(matrix: VariableCharMatrix): Long =
+        accessibleRolls(matrix).size.toLong()
 
-        matrix.forEach { cell ->
+    private fun part2(matrix: VariableCharMatrix): Long {
+        val removedRolls = mutableListOf<Vector2>()
+
+        var remove = true
+        while (remove) {
+            val accessible = accessibleRolls(matrix)
+            if (accessible.isEmpty()) {
+                remove = false
+                continue
+            }
+
+            accessible.forEach {
+                removedRolls.add(it)
+                matrix.setAt(it, '.')
+            }
+        }
+
+        return removedRolls.size.toLong()
+    }
+
+    private fun accessibleRolls(matrix: VariableCharMatrix): List<Vector2> {
+        val accessibleRolls = matrix.map { cell ->
             if (cell.value == '.')
-                return@forEach
+                return@map null
 
             val adjacent = listOf(
                 cell.coordinates + Direction.NORTH,
@@ -37,10 +59,13 @@ class PrintingDepartment(
                 .map { matrix.getAt(it) }
 
             if (adjacent.count { it == '@' } < 4)
-                accessibleRolls.add(cell.coordinates)
-        }
+                return@map cell.coordinates
 
-        return accessibleRolls.distinct().size.toLong()
+            return@map null
+        }.filterNotNull()
+            .distinct()
+
+        return accessibleRolls
     }
 }
 
