@@ -1,9 +1,9 @@
 package io.nozemi.aoc.solutions.year2025.day05
 
+import io.nozemi.aoc.library.extensions.merged
 import io.nozemi.aoc.library.puzzle.AbstractPuzzle
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
-import io.nozemi.aoc.solutions.year2025.day05.mergeOverlapping
 import java.util.stream.Stream
 
 class Cafeteria(
@@ -29,7 +29,7 @@ class Cafeteria(
                 available.add(line.toLong())
             }
 
-            return Ingredients(available, ranges.mergeOverlapping())
+            return Ingredients(available, ranges.merged)
         }
     }
 
@@ -45,27 +45,6 @@ class Cafeteria(
 
     private fun part2(ingredients: Ingredients): Long =
         ingredients.fresh.sumOf { (it.last - it.first) + 1 }
-}
-
-fun List<LongRange>.mergeOverlapping(): List<LongRange> {
-    if (this.isEmpty())
-        return emptyList()
-
-    val sorted = this.sortedBy { it.first }
-
-    val result = mutableListOf<LongRange>()
-
-    var current = sorted.first()
-    for (range in sorted.drop(1)) {
-        if (range.first > current.last + 1) {
-            result += current
-            current = range
-        } else current = current.first..maxOf(current.last, range.last)
-    }
-
-    result += current
-
-    return result
 }
 
 data class Ingredients(
