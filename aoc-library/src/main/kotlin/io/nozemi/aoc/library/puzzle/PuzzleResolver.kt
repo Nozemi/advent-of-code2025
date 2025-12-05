@@ -40,12 +40,14 @@ class PuzzleResolver(private val basePackage: String = "io.nozemi.aoc.solutions"
     }
 
     fun getPuzzle(year: Int, day: Int): AbstractPuzzle<*>? {
-        val puzzleClass = puzzleMap[year]?.get(day) ?: return null
+        val puzzleClass = puzzleMap[year]?.get(day)
+            ?: return null
+
         val puzzleInstance: AbstractPuzzle<*>
         try {
             puzzleInstance = Class.forName(puzzleClass)
-                .getDeclaredConstructor(String::class.java)
-                .newInstance("") as AbstractPuzzle<*>
+                .getDeclaredConstructor()
+                .newInstance() as AbstractPuzzle<*>
         } catch(exception: InvocationTargetException) {
             if (exception.cause?.message?.contains("No data provided") == true) {
                 throw NoDataProvidedException()

@@ -2,14 +2,21 @@ package io.nozemi.aoc.library.types.matrix
 
 import io.nozemi.aoc.library.types.matrix.interfaces.IVariableSizeMatrix
 import io.nozemi.aoc.library.types.vectors.Vector2
-import java.util.stream.Stream
 
 class VariableCharMatrix(
     private val values: Array<CharArray>
 ) : IVariableSizeMatrix<Char> {
-    override val cols get() = values.getOrNull(0)?.size ?: 0
+    override val cols get() = values.maxBy { it.size }.size
     override val rows get() = values.size
     override val size get() = rows * cols
+
+    init {
+        values.forEachIndexed { row, rowCols ->
+            val newArray = CharArray(cols) { ' ' }
+            rowCols.copyInto(newArray)
+            values[row] = newArray
+        }
+    }
 
     override val distinctValues get() = values.map { it.distinct() }.flatten().distinct()
 
@@ -52,7 +59,7 @@ class VariableCharMatrix(
         }.filterNotNull()
     }
 
-    override fun toString() = values.joinToString("\n") { it.joinToString(" ") }
+    override fun toString() = values.joinToString("\n") { it.joinToString("") }
     override fun copyOf() = VariableCharMatrix(values.copyOf())
 
     override fun iterator() = values.mapIndexed { y, row ->

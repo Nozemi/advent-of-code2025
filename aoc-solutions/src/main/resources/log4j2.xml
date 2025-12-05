@@ -9,6 +9,6 @@
         <Root level="info">
             <AppenderRef level="all" ref="Console"/>
         </Root>
-        <Logger name="io.nozemi" level="debug" additivity="true"/>
+        <Logger name="io.nozemi" level="warn" additivity="true"/>
     </Loggers>
 </Configuration>

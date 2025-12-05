@@ -2,7 +2,12 @@ package io.nozemi.aoc.library.puzzle
 
 import com.github.michaelbull.logging.InlineLogger
 import com.github.michaelbull.result.onSuccess
-import io.nozemi.aoc.library.cli.*
+import io.nozemi.aoc.library.cli.ansi.ANSI_BLUE
+import io.nozemi.aoc.library.cli.ansi.ANSI_BOLD
+import io.nozemi.aoc.library.cli.ansi.ANSI_GREEN
+import io.nozemi.aoc.library.cli.ansi.ANSI_RED
+import io.nozemi.aoc.library.cli.ansi.ANSI_RESET
+import io.nozemi.aoc.library.cli.ansi.ANSI_YELLOW
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.collections.forEachIndexed
@@ -23,9 +28,10 @@ abstract class AbstractPuzzle<T> {
 
     private val inputFilePath: Path
 
-    private val puzzleName = javaClass.simpleName
     private val year: Int
     private val day: Int
+
+    val name = javaClass.simpleName
 
     protected abstract val parser: AbstractPuzzleParser<T>
     abstract val solutions: PuzzleSolutions<T>
@@ -114,7 +120,7 @@ abstract class AbstractPuzzle<T> {
         val parsedInputs = loadInput(ignoredPatterns)
 
         println("")
-        val titleLine = "==   Solving $puzzleName   =="
+        val titleLine = "==   Solving $name   =="
         println(ANSI_BOLD + ANSI_BLUE + "=".padEnd(titleLine.length, '=') + ANSI_RESET)
         println(ANSI_BOLD + ANSI_BLUE + titleLine + ANSI_RESET)
         println(ANSI_BOLD + ANSI_BLUE + "=".padEnd(titleLine.length, '=') + ANSI_RESET)
@@ -137,11 +143,11 @@ abstract class AbstractPuzzle<T> {
 
                 val (color, failed) = validAnswer
 
-                var output = "$color${answer.value}$ANSI_RESET"
+                var output = "$color${answer.value}${ANSI_RESET}"
                 if (failed)
-                    output += " (Expected: $ANSI_GREEN${expected}$ANSI_RESET)"
+                    output += " (Expected: ${ANSI_GREEN}${expected}${ANSI_RESET})"
 
-                println("- ${ANSI_BOLD}Part ${part + 1}:$ANSI_RESET $output (${answer.duration})")
+                println("- ${ANSI_BOLD}Part ${part + 1}:${ANSI_RESET} $output (${answer.duration})")
             }
             println("")
         }
