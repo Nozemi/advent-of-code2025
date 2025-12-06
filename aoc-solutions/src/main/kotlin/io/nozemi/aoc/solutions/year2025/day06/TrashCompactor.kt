@@ -5,23 +5,44 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
 import io.nozemi.aoc.library.types.matrix.VariableCharMatrix
-import java.util.stream.Stream
 
 class TrashCompactor(
     override val parser: AbstractPuzzleParser<VariableCharMatrix> = CharMatrixParser()
 ) : AbstractPuzzle<VariableCharMatrix>() {
-
-    class MathGridParser : AbstractPuzzleParser<MathGrid>() {
-        override fun parse(input: Stream<String>): MathGrid =
-            MathGrid.from(input.toList())
-    }
 
     override val solutions: PuzzleSolutions<VariableCharMatrix> = listOf(
         ::part1,
         ::part2
     )
 
-    private fun part1(matrix: VariableCharMatrix): Long = 0
+    private fun part1(matrix: VariableCharMatrix): Long {
+        val parsed = matrix.toString().split("\n").map {
+            it.trim().replace("\\s+".toRegex(), " ")
+                .split(" ")
+        }
+
+        val operators = parsed.last()
+        val groups = parsed.dropLast(1).map {
+            it.map { num -> num.toLong() }
+        }
+
+        val mapped = groups.flatMap { group ->
+            group.mapIndexed { index, num -> index to num }
+        }.groupBy { it.first }
+            .map { it.key to it.value.map { a -> a.second } }
+            .toMap()
+
+        return mapped.map { (group, numbers) ->
+            val operator = operators[group]
+
+            return@map when (operator) {
+                "+" -> numbers.sum()
+                "*" -> numbers.reduce { a, b -> a * b }
+                else -> 0
+            }
+        }.sum()
+    }
+
     private fun part2(matrix: VariableCharMatrix): Long {
         val orientatedMatrix = matrix.transposed().reversed()
 
@@ -58,8 +79,6 @@ class TrashCompactor(
             }
         }
 
-        //println(orientatedMatrix)
-
         return sum
     }
 }
@@ -72,12 +91,5 @@ enum class Operator(val symbol: Char) {
 }
 
 fun main() {
-    TrashCompactor().solve(exampleOnly = false)
+    TrashCompactor().solve()
 }
-
-/*
-1 2 3 3 2 8 5 1 1 6 4 0
-4 5 1 6 4 0 3 8 7 2 3 0
-6 1 1 9 8 0 2 1 5 3 1 4
-* * * + + + * * * + + +
- */
