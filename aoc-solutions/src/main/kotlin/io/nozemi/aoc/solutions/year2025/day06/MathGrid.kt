@@ -18,12 +18,44 @@ class MathGrid(
             }
         }.toList()
 
-    enum class Operator(val symbol: Char) {
-        PLUS('+'),
-        MINUS('-'),
-        MULTIPLY('*'),
-        DIVIDE('/')
-    }
+    val sumOfGroupsLeftToRight: List<Long>
+        get() = numberGroups.toList().reversed()
+            .toMap()
+            .map { (column, group) ->
+                //println(group)
+
+                val operator = operators[column]
+                val padding = when (operator) {
+                    Operator.PLUS, Operator.MINUS -> '0'
+                    Operator.MULTIPLY, Operator.DIVIDE -> '0'
+                    else -> error("Unexpected operator '$operator'")
+                }
+                val groupAsStrings = group.map { it.toString() }
+                val digits = groupAsStrings.maxBy { a -> a.length }.length
+
+                val newGroups = groupAsStrings.map {
+                    it.padEnd(
+                        digits,
+                        padChar = padding
+                    )
+                }.map { it.reversed() }
+
+                val finalNumbers = mutableListOf<Long>()
+                for (i in 0..<digits) {
+                    finalNumbers.add(newGroups.map { it[i] }.joinToString("").toLong())
+                }
+
+                val sum = when (operator) {
+                    Operator.PLUS -> finalNumbers.sum()
+                    Operator.MINUS -> finalNumbers.reduce { a, b -> a - b }
+                    Operator.MULTIPLY -> finalNumbers.reduce { a, b -> a * b }
+                    Operator.DIVIDE -> finalNumbers.reduce { a, b -> a / b }
+                }
+
+                println("$newGroups -> $finalNumbers -> $sum")
+
+                sum
+            }.toList()
 
     companion object {
 

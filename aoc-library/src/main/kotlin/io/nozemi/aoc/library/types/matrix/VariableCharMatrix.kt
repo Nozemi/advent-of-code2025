@@ -29,6 +29,10 @@ class VariableCharMatrix(
         })
     }
 
+    fun reversed(): VariableCharMatrix {
+        return VariableCharMatrix(values.reversedArray())
+    }
+
     fun forEach(action: (row: CharArray) -> Unit) {
         values.forEach { action(it) }
     }
