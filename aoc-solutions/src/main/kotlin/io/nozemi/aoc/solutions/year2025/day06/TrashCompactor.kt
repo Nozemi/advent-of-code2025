@@ -16,8 +16,9 @@ class TrashCompactor(
     )
 
     private fun part1(matrix: VariableCharMatrix): Long {
+        val pattern = "\\s+".toRegex()
         val parsed = matrix.toString().split("\n").map {
-            it.trim().replace("\\s+".toRegex(), " ")
+            it.trim().replace(pattern, " ")
                 .split(" ")
         }
 
@@ -30,17 +31,16 @@ class TrashCompactor(
             group.mapIndexed { index, num -> index to num }
         }.groupBy { it.first }
             .map { it.key to it.value.map { a -> a.second } }
-            .toMap()
 
-        return mapped.map { (group, numbers) ->
+        return mapped.sumOf { (group, numbers) ->
             val operator = operators[group]
 
-            return@map when (operator) {
+            return@sumOf when (operator) {
                 "+" -> numbers.sum()
-                "*" -> numbers.reduce { a, b -> a * b }
+                "*" -> numbers.reduce(Long::times)
                 else -> 0
             }
-        }.sum()
+        }
     }
 
     private fun part2(matrix: VariableCharMatrix): Long {
@@ -68,7 +68,7 @@ class TrashCompactor(
 
             when (operator) {
                 Operator.PLUS -> sum += numbers.sum()
-                Operator.MULTIPLY -> sum += numbers.reduce { a, b -> a * b }
+                Operator.MULTIPLY -> sum += numbers.reduce(Long::times)
                 null -> {}
                 else -> {}
             }

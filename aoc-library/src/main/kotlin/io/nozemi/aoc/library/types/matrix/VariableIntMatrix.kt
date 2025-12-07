@@ -2,7 +2,6 @@ package io.nozemi.aoc.library.types.matrix
 
 import io.nozemi.aoc.library.types.matrix.interfaces.IVariableSizeMatrix
 import io.nozemi.aoc.library.types.vectors.Vector2
-import java.util.stream.Stream
 
 class VariableIntMatrix(
     private val values: Array<IntArray>
@@ -42,6 +41,15 @@ class VariableIntMatrix(
         values[coords.y][coords.x] = value
         return true
     }
+
+    override fun findAll(predicate: (MatrixCell<Int>) -> Boolean): List<Vector2> = values.flatMapIndexed { y, row ->
+        row.mapIndexed { x, cell ->
+            if (predicate(MatrixCell(x, y, cell)))
+                return@mapIndexed Vector2(x, y)
+
+            return@mapIndexed null
+        }
+    }.filterNotNull()
 
     override fun findAll(search: Int): List<Vector2> = values.flatMapIndexed { y, row ->
         row.mapIndexed { x, col ->

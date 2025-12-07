@@ -46,19 +46,15 @@ class PrintingDepartment(
             if (cell.value == '.')
                 return@map null
 
-            val adjacent = listOf(
-                cell.coordinates + Direction.NORTH,
-                cell.coordinates + Direction.SOUTH,
-                cell.coordinates + Direction.EAST,
-                cell.coordinates + Direction.WEST,
-                cell.coordinates + Direction.NORTH_EAST,
-                cell.coordinates + Direction.NORTH_WEST,
-                cell.coordinates + Direction.SOUTH_EAST,
-                cell.coordinates + Direction.SOUTH_WEST
-            ).filter { (x, y) -> x >= 0 && y >= 0 && x < matrix.cols && y < matrix.rows }
-                .map { matrix.getAt(it) }
+            val adjacentRolls = matrix.adjacent(
+                coords = cell.coordinates,
+                includeDiagonal = true,
+                filter = { (a) ->
+                    a.value == '@'
+                }
+            ).size
 
-            if (adjacent.count { it == '@' } < 4)
+            if (adjacentRolls < 4)
                 return@map cell.coordinates
 
             return@map null

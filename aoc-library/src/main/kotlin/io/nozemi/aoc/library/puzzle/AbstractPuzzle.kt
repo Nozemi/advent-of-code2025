@@ -2,12 +2,8 @@ package io.nozemi.aoc.library.puzzle
 
 import com.github.michaelbull.logging.InlineLogger
 import com.github.michaelbull.result.onSuccess
-import io.nozemi.aoc.library.cli.ansi.ANSI_BLUE
-import io.nozemi.aoc.library.cli.ansi.ANSI_BOLD
-import io.nozemi.aoc.library.cli.ansi.ANSI_GREEN
-import io.nozemi.aoc.library.cli.ansi.ANSI_RED
-import io.nozemi.aoc.library.cli.ansi.ANSI_RESET
-import io.nozemi.aoc.library.cli.ansi.ANSI_YELLOW
+import io.nozemi.aoc.library.cli.ansi.*
+import io.nozemi.aoc.library.puzzle.InputDownloader.Companion.inputDownloader
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.collections.forEachIndexed
@@ -16,9 +12,8 @@ import kotlin.io.path.exists
 import kotlin.io.path.isDirectory
 import kotlin.io.path.name
 import kotlin.time.TimedValue
+import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
-
-val inputDownloader = InputDownloader()
 
 abstract class AbstractPuzzle<T> {
     val logger = InlineLogger(AbstractPuzzle::class)
@@ -72,67 +67,65 @@ abstract class AbstractPuzzle<T> {
         return matching?.map { it.path } ?: emptyList()
     }
 
-    fun loadInput(ignoredPatterns: List<String> = listOf()): List<ParsedInput<T>> {
+    private val v = "$ANSI_BOLD$ANSI_CYAN"
+    private val r = ANSI_RESET
+    fun loadInput(exampleOnly: Boolean = false): List<ParsedInput<T>> {
         val input = findInput()
         if (input.none { !it.contains("example") }) {
             inputDownloader.downloadInput(year, day).onSuccess {
-                return loadInput(ignoredPatterns)
+                return loadInput(exampleOnly)
             }
         }
 
-        return input.filter {
-            !ignoredPatterns.any { ignore ->
-                it == ignore
-                        || it.startsWith(ignore)
-                        || it.endsWith(ignore)
-                        || it.contains(ignore)
-            }
-        }
-            .map {
+        val parsedInput = input.filter {
+            (exampleOnly && it.contains("example")) || !exampleOnly
+        }.map {
                 val file = Path(it)
                 var title = file.name
                 val expectedAnswers = mutableListOf<Long>()
 
                 val linesToSkip: Long
-                Files.lines(file).use { lines ->
-                    lines.takeWhile { line ->
-                        line.startsWith("TITLE:") || line.startsWith("PART ")
-                    }.use { result ->
-                        val properties = result.toList()
+                val duration = measureTime {
+                    Files.lines(file).use { lines ->
+                        lines.takeWhile { line ->
+                            line.startsWith("TITLE:") || line.startsWith("PART ")
+                        }.use { result ->
+                            val properties = result.toList()
 
-                        linesToSkip = properties.size.toLong()
+                            linesToSkip = properties.size.toLong()
 
-                        properties.forEach { line ->
-                            if (line.startsWith("TITLE:"))
-                                title = line.replaceFirst("TITLE:", "").trim()
+                            properties.forEach { line ->
+                                if (line.startsWith("TITLE:"))
+                                    title = line.replaceFirst("TITLE:", "").trim()
 
-                            if (line.startsWith("PART "))
-                                expectedAnswers.add(line.replaceFirst("PART \\d+:".toRegex(), "").trim().toLong())
+                                if (line.startsWith("PART "))
+                                    expectedAnswers.add(line.replaceFirst("PART \\d+:".toRegex(), "").trim().toLong())
+                            }
                         }
                     }
                 }
 
-                ParsedInput(title, expectedAnswers, parser.parse(Files.lines(file).skip(linesToSkip)))
+                val parsed = measureTimedValue { parser.parse(Files.lines(file).skip(linesToSkip)) }
+                println("Parsing: $v$title$r, headers in $v$duration$r, data in $v${parsed.duration}$r")
+                ParsedInput(title, expectedAnswers, parsed.value)
             }
+
+        println()
+
+        return parsedInput
     }
 
-    fun solve(ignoredPatterns: List<String> = listOf()) {
-        val parsedInputs = loadInput(ignoredPatterns)
-
-        println("")
-        val titleLine = "==   Solving $name   =="
-        println(ANSI_BOLD + ANSI_BLUE + "=".padEnd(titleLine.length, '=') + ANSI_RESET)
-        println(ANSI_BOLD + ANSI_BLUE + titleLine + ANSI_RESET)
-        println(ANSI_BOLD + ANSI_BLUE + "=".padEnd(titleLine.length, '=') + ANSI_RESET)
+    fun solve(exampleOnly: Boolean = false) {
+        val parsedInputs = loadInput(exampleOnly)
 
         parsedInputs.forEach { input ->
             solutions.forEachIndexed { index, solution ->
-                input.answers[index] = measureTimedValue { solution.invoke(input.data) }
+                input.answers[index] = measureTimedValue { solution.invoke(input.data).toString().toLong() }
             }
         }
 
         parsedInputs.forEach { input ->
-            println(ANSI_BOLD + ANSI_BLUE + "==== ${input.title} ====" + ANSI_RESET)
+            println(ANSI_BOLD + ANSI_BLUE + "== Input: ${input.title} ==" + ANSI_RESET)
             input.answers.forEach { (part, answer) ->
                 val expected = input.expectedAnswers.getOrNull(part)
                 val validAnswer = when (expected) {
@@ -147,9 +140,9 @@ abstract class AbstractPuzzle<T> {
                 if (failed)
                     output += " (Expected: ${ANSI_GREEN}${expected}${ANSI_RESET})"
 
-                println("- ${ANSI_BOLD}Part ${part + 1}:${ANSI_RESET} $output (${answer.duration})")
+                println("- ${ANSI_BOLD}Part ${part + 1}:${ANSI_RESET} $output ($ANSI_BOLD$ANSI_CYAN${answer.duration}$ANSI_RESET)")
             }
-            println("")
+            println()
         }
     }
 

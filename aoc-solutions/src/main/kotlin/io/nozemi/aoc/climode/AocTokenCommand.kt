@@ -3,7 +3,7 @@ package io.nozemi.aoc.climode
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
-import io.nozemi.aoc.library.puzzle.inputDownloader
+import io.nozemi.aoc.library.puzzle.InputDownloader.Companion.inputDownloader
 import java.nio.file.Files
 
 class AocTokenCommand : CliktCommand() {

@@ -29,9 +29,7 @@ class VariableCharMatrix(
         })
     }
 
-    fun reversed(): VariableCharMatrix {
-        return VariableCharMatrix(values.reversedArray())
-    }
+    fun reversed() = VariableCharMatrix(values.reversedArray())
 
     fun forEach(action: (row: CharArray) -> Unit) {
         values.forEach { action(it) }
@@ -54,6 +52,15 @@ class VariableCharMatrix(
     operator fun set(x: Int, y: Int, value: Char) {
         values[y][x] = value
     }
+
+    override fun findAll(predicate: (MatrixCell<Char>) -> Boolean): List<Vector2> = values.flatMapIndexed { y, row ->
+        row.mapIndexed { x, cell ->
+            if (predicate(MatrixCell(x, y, cell)))
+                return@mapIndexed Vector2(x, y)
+
+            return@mapIndexed null
+        }
+    }.filterNotNull()
 
     override fun findAll(search: Char): List<Vector2> = values.flatMapIndexed { y, row ->
         row.mapIndexed { x, col ->

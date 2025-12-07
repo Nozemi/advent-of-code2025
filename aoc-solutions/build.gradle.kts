@@ -18,12 +18,26 @@ val currentDay = MonthDay.now().dayOfMonth
 
 tasks.register<JavaExec>("solveToday") {
     group = "advent-of-code"
+
     workingDir = rootDir
     classpath = java.sourceSets["main"].runtimeClasspath
-    mainClass.set("io.nozemi.aoc.ChallengeSelectScreenKt")
+    mainClass.set("io.nozemi.aoc.ApplicationKt")
     standardInput = System.`in`
     args = listOf(
         "-y$currentYear",
         "-d$currentDay"
+    )
+}
+
+tasks.register<JavaExec>("solve$currentYear") {
+    group = "advent-of-code"
+
+    workingDir = rootDir
+    classpath = java.sourceSets["main"].runtimeClasspath
+    mainClass.set("io.nozemi.aoc.ApplicationKt")
+    standardInput = System.`in`
+    args = listOf(
+        "-y$currentYear",
+        "-d1-30"
     )
 }

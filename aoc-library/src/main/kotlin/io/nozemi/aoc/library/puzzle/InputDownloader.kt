@@ -82,6 +82,10 @@ class InputDownloader {
         }
     }
 
+    companion object {
+        val inputDownloader = InputDownloader()
+    }
+
     class MissingTokenError : Error("No AoC token was provided")
     class DownloadInputError(override val message: String) : Error(message)
 }

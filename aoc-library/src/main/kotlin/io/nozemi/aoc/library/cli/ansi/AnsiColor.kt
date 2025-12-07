@@ -12,4 +12,6 @@ enum class AnsiColor(val style: String) {
     ;
 
     override fun toString(): String = style
+
+    operator fun plus(other: Any): String = "$this$other"
 }
