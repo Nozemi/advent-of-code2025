@@ -21,7 +21,7 @@ interface IVariableSizeMatrix<T> : Iterable<MatrixCell<T>> {
     fun getAt(x: Int, y: Int) = getAt(Vector2(x, y))
     fun getAt(coords: List<Vector2>): List<T> = coords.mapNotNull { getAt(it) }
     fun getAtOrNull(coords: Vector2): T?
-    fun getAtOrNull(x: Int, y: Int) = getAt(Vector2(x, y))
+    fun getAtOrNull(x: Int, y: Int) = getAtOrNull(Vector2(x, y))
 
     fun setAt(x: Int, y: Int, value: T) = setAt(Vector2(x, y), value)
     fun setAt(coords: Vector2, value: T): Boolean
@@ -33,6 +33,7 @@ interface IVariableSizeMatrix<T> : Iterable<MatrixCell<T>> {
         cell.value ?: error("Cell value cannot be null")
     )
 
+    fun findAll(predicate: (MatrixCell<T>) -> Boolean): List<Vector2>
     fun findAll(search: T): List<Vector2>
 
     fun adjacent(
