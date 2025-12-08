@@ -1,14 +1,13 @@
 package io.nozemi.aoc.library.cli.ascii
 
-import io.nozemi.aoc.library.cli.ansi.ANSI_BOLD
-import io.nozemi.aoc.library.cli.ansi.ANSI_RESET
-import io.nozemi.aoc.library.types.matrix.VariableCharMatrix
+import io.nozemi.aoc.library.cli.ansi.*
+import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
 import java.nio.file.Path
 import kotlin.io.path.readLines
 import kotlin.text.map
 
 class AsciiFont(file: Path) {
-    private val artMap: MutableMap<Char, VariableCharMatrix> = mutableMapOf()
+    private val artMap: MutableMap<Char, MatrixDynamicChar> = mutableMapOf()
     private var _name: String = ""
     private var _height: Int = 0
     private var _spacing: Int = 0
@@ -41,7 +40,7 @@ class AsciiFont(file: Path) {
 
             if (line.startsWith("C: ")) {
                 if (character != null)
-                    artMap[character] = VariableCharMatrix.from(artMatrix)
+                    artMap[character] = MatrixDynamicChar.from(artMatrix)
 
                 character = line.substringAfter("C: ").trim()[0]
                 artMatrix = mutableListOf()
@@ -53,7 +52,7 @@ class AsciiFont(file: Path) {
         }
 
         if (character != null)
-            artMap[character] = VariableCharMatrix.from(artMatrix)
+            artMap[character] = MatrixDynamicChar.from(artMatrix)
     }
 
     fun parse(text: String, options: AsciiArtRenderOptionsBuilder.() -> Unit = {}): AsciiArtText {
@@ -83,7 +82,7 @@ class AsciiFont(file: Path) {
             }
         }
 
-        val artMatrix = VariableCharMatrix.from(
+        val artMatrix = MatrixDynamicChar.from(
             lines.map { it.joinToString("") }
         )
 

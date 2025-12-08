@@ -4,18 +4,18 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzle
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
-import io.nozemi.aoc.library.types.matrix.VariableCharMatrix
+import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
 
 class TrashCompactor(
-    override val parser: AbstractPuzzleParser<VariableCharMatrix> = CharMatrixParser()
-) : AbstractPuzzle<VariableCharMatrix>() {
+    override val parser: AbstractPuzzleParser<MatrixDynamicChar> = CharMatrixParser()
+) : AbstractPuzzle<MatrixDynamicChar>() {
 
-    override val solutions: PuzzleSolutions<VariableCharMatrix> = listOf(
+    override val solutions: PuzzleSolutions<MatrixDynamicChar> = listOf(
         ::part1,
         ::part2
     )
 
-    private fun part1(matrix: VariableCharMatrix): Long {
+    private fun part1(matrix: MatrixDynamicChar): Long {
         val pattern = "\\s+".toRegex()
         val parsed = matrix.toString().split("\n").map {
             it.trim().replace(pattern, " ")
@@ -43,7 +43,7 @@ class TrashCompactor(
         }
     }
 
-    private fun part2(matrix: VariableCharMatrix): Long {
+    private fun part2(matrix: MatrixDynamicChar): Long {
         val orientatedMatrix = matrix.transposed().reversed()
 
         var sum = 0L

@@ -1,9 +1,16 @@
+@file:Suppress("unused")
+
 package io.nozemi.aoc.library.types.matrix
 
-import io.nozemi.aoc.library.types.vectors.Vector2
+import io.nozemi.aoc.library.types.vector.IVector2
+import io.nozemi.aoc.library.types.vector.Vector2Int
 
-data class MatrixCell<T>(val x: Int, val y: Int, val value: T?) {
-    constructor(coordinates: Vector2, value: T?) : this(coordinates.x, coordinates.y, value)
+data class MatrixCell<T>(
+    val pos: IVector2<Int>,
+    val value: T?
+) {
+    constructor(x: Int, y: Int, value: T?) : this(Vector2Int(x, y), value)
 
-    val coordinates = Vector2(x, y)
+    val x get() = pos.x
+    val y get() = pos.y
 }

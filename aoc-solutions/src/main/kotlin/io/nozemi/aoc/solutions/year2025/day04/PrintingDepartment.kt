@@ -4,25 +4,25 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzle
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
-import io.nozemi.aoc.library.types.Direction
-import io.nozemi.aoc.library.types.matrix.VariableCharMatrix
-import io.nozemi.aoc.library.types.vectors.Vector2
+import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
+import io.nozemi.aoc.library.types.vector.IVector2
 
 class PrintingDepartment(
-    override val parser: AbstractPuzzleParser<VariableCharMatrix> = CharMatrixParser()
-) : AbstractPuzzle<VariableCharMatrix>() {
+    override val parser: AbstractPuzzleParser<MatrixDynamicChar> = CharMatrixParser()
+) : AbstractPuzzle<MatrixDynamicChar>() {
 
 
-    override val solutions: PuzzleSolutions<VariableCharMatrix> = listOf(
+    override val solutions: PuzzleSolutions<MatrixDynamicChar> = listOf(
         ::part1,
         ::part2
     )
 
-    private fun part1(matrix: VariableCharMatrix): Long =
+    private fun part1(matrix: MatrixDynamicChar): Long =
         accessibleRolls(matrix).size.toLong()
 
-    private fun part2(matrix: VariableCharMatrix): Long {
-        val removedRolls = mutableListOf<Vector2>()
+    private fun part2(matrix: MatrixDynamicChar): Long {
+        var matrix = matrix
+        val removedRolls = mutableListOf<IVector2<Int>>()
 
         var remove = true
         while (remove) {
@@ -34,28 +34,28 @@ class PrintingDepartment(
 
             accessible.forEach {
                 removedRolls.add(it)
-                matrix.setAt(it, '.')
+                matrix = matrix.set(it, '.')
             }
         }
 
         return removedRolls.size.toLong()
     }
 
-    private fun accessibleRolls(matrix: VariableCharMatrix): List<Vector2> {
+    private fun accessibleRolls(matrix: MatrixDynamicChar): List<IVector2<Int>> {
         val accessibleRolls = matrix.map { cell ->
             if (cell.value == '.')
                 return@map null
 
             val adjacentRolls = matrix.adjacent(
-                coords = cell.coordinates,
-                includeDiagonal = true,
-                filter = { (a) ->
-                    a.value == '@'
+                from = cell.pos,
+                includeDiagonals = true,
+                filter = { (cell) ->
+                    cell.value == '@'
                 }
             ).size
 
             if (adjacentRolls < 4)
-                return@map cell.coordinates
+                return@map cell.pos
 
             return@map null
         }.filterNotNull()

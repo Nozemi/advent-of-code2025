@@ -4,25 +4,26 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzle
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
-import io.nozemi.aoc.library.types.matrix.VariableCharMatrix
-import io.nozemi.aoc.library.types.vectors.Vector2
+import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
+import io.nozemi.aoc.library.types.vector.IVector2
+import io.nozemi.aoc.library.types.vector.Vector2Int
 
 class Laboratories(
-    override val parser: AbstractPuzzleParser<VariableCharMatrix> = CharMatrixParser()
-) : AbstractPuzzle<VariableCharMatrix>() {
+    override val parser: AbstractPuzzleParser<MatrixDynamicChar> = CharMatrixParser()
+) : AbstractPuzzle<MatrixDynamicChar>() {
 
-    override val solutions: PuzzleSolutions<VariableCharMatrix> = listOf(
+    override val solutions: PuzzleSolutions<MatrixDynamicChar> = listOf(
         ::part1,
         ::part2
     )
 
-    private fun part1(matrix: VariableCharMatrix): Int = matrix.beamSplits().size
+    private fun part1(matrix: MatrixDynamicChar): Int =
+        matrix.beamSplits().size
 
-    private fun part2(matrix: VariableCharMatrix): Long =
-        matrix.beamPaths(matrix.first { it.value == beamStart }.coordinates)
+    private fun part2(matrix: MatrixDynamicChar): Long =
+        matrix.beamPaths(matrix.first { it.value == beamStart }.pos)
 
-
-    private fun VariableCharMatrix.beamPaths(start: Vector2): Long {
+    private fun MatrixDynamicChar.beamPaths(start: IVector2<Int>): Long {
         val cache = Array(this.rows) { LongArray(this.cols) }
 
         for (x in 0 until this.cols) {
@@ -35,6 +36,7 @@ class Laboratories(
                     emptyTile, beamStart -> {
                         cache[y][x] = cache[y + 1][x]
                     }
+
                     beamSplitter -> {
                         var total = 0L
                         if (x > 0) total += cache[y + 1][x - 1]
@@ -48,13 +50,13 @@ class Laboratories(
         return cache[start.y][start.x]
     }
 
-    private fun VariableCharMatrix.beamSplits(
+    private fun MatrixDynamicChar.beamSplits(
         currentRow: Int? = null,
         columns: List<Int> = listOf(),
-        splitters: List<Vector2> = listOf(),
-    ): List<Vector2> {
+        splitters: List<IVector2<Int>> = listOf(),
+    ): List<IVector2<Int>> {
         if (currentRow == null) {
-            val start = this.first { it.value == beamStart }.coordinates
+            val start = this.first { it.value == beamStart }.pos
 
             return this.beamSplits(
                 start.y,
@@ -70,11 +72,12 @@ class Laboratories(
 
         val rowSplitters = this.findAll { cell ->
             cell.y == currentRow && cell.value == beamSplitter
-        }.filter { it.x in columns }
+        }.filter { it.x in columns }.map { it.pos }
 
-        val additionalColumns = rowSplitters.flatMap { (x) ->
-            listOf(x - 1, x + 1)
-        }
+        val additionalColumns = rowSplitters.map { it.x }
+            .flatMap { x ->
+                listOf(x - 1, x + 1)
+            }
 
         val columns = (columns + additionalColumns).filter {
             it !in rowSplitters.map { s -> s.x }

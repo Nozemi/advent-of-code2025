@@ -4,29 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b6ffdf0-c8e3-4f59-bfcf-5a32aa532c32" name="Changes" comment="Day 7 - Part 1">
-      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2024/day01/HistorianHysteria.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2024/day02/RedNosedReport.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2024/day02/RedNosedReports.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2024/day14/RestroomRedoubt.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day07/stuff.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/inputs/year2024/day1.example.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/inputs/year2024/day1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/inputs/year2024/day2.example.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/inputs/year2024/day2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ansi/AnsiColor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ansi/AnsiColor.kt" afterDir="false" />
+    <list default="true" id="0b6ffdf0-c8e3-4f59-bfcf-5a32aa532c32" name="Changes" comment="Various Other Stuff">
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/extensions/VectorExtensions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/VectorParsers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction3D.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicChar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicDouble.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicInt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixFixed2DDouble.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixFixed2DInt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IMatrix.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector2.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector3.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Int.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Long.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Int.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Long.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day08/Playground.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/inputs/year2025/day8.example.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ascii/AsciiFont.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ascii/AsciiFont.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/AbstractPuzzle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/AbstractPuzzle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/InputDownloader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/InputDownloader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/TypeAliases.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/TypeAliases.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableCharMatrix.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableCharMatrix.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableIntMatrix.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableIntMatrix.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-solutions/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/Application.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/climode/AocTokenCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/climode/AocTokenCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/MatrixParsers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/MatrixParsers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction2D.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/FixedDouble2DMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/FixedInt2DMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixCell.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixCell.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableCharMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableIntMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IFixedSizeMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IVariableSizeMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vectors/Vector2.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day04/PrintingDepartment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day04/PrintingDepartment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day06/TrashCompactor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day06/TrashCompactor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day07/Laboratories.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day07/Laboratories.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/inputs/year2025/day7.example.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/inputs/year2025/day7.example.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +74,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="advent-of-code" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aoc2025" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -72,8 +90,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Interface" />
         <option value="Kotlin Enum" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -104,6 +122,7 @@
     "Gradle.Download Sources.executor": "Run",
     "Gradle.aoc2025 [:io.nozemi.aoc2025.Day01Kt.main()].executor": "Run",
     "Gradle.aoc2025 [:io.nozemi.aoc2025.PuzzleHelpersKt.main()].executor": "Run",
+    "Gradle.aoc2025 [build].executor": "Run",
     "Gradle.aoc2025 [solve2025].executor": "Run",
     "Gradle.aoc2025 [solveToday].executor": "Run",
     "Gradle.aoc2025:aoc-library [:aoc-library:io.nozemi.aoc.library.AsciiFontKt.main()].executor": "Run",
@@ -144,17 +163,40 @@
       <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\aoc-solutions\src\main\resources" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="io.nozemi.aoc.library.types.vectors" />
       <recent name="io.nozemi.aoc.library.types.matrix" />
     </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="io.nozemi.aoc.library.types.matrix" />
+      <recent name="io.nozemi.aoc.library.types.matrix.interfaces" />
       <recent name="io.nozemi.aoc.application" />
       <recent name="io.nozemi.aoc.library.cli.ascii" />
       <recent name="io.nozemi.aoc.library.cli.ansi" />
-      <recent name="io.nozemi.aoc.library.types.matrix.interfaces" />
-      <recent name="io.nozemi.aoc.library.puzzle.parsers" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.LaboratoriesKt">
+  <component name="RunManager" selected="Gradle.aoc2025 [solve2025]">
+    <configuration name="aoc2025 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="aoc2025 [solve2025]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -199,13 +241,6 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="LaboratoriesKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day07.LaboratoriesKt" />
-      <module name="aoc2025.aoc-solutions.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PrintingDepartmentKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day04.PrintingDepartmentKt" />
       <module name="aoc2025.aoc-solutions.main" />
@@ -213,27 +248,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StuffKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day07.StuffKt" />
+    <configuration name="TrashCompactorKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day06.TrashCompactorKt" />
       <module name="aoc2025.aoc-solutions.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.aoc2025 [build]" />
       <item itemvalue="Gradle.aoc2025 [solve2025]" />
       <item itemvalue="Gradle.aoc2025 [solveToday]" />
-      <item itemvalue="Kotlin.LaboratoriesKt" />
-      <item itemvalue="Kotlin.StuffKt" />
       <item itemvalue="Kotlin.PrintingDepartmentKt" />
+      <item itemvalue="Kotlin.TrashCompactorKt" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.StuffKt" />
-        <item itemvalue="Kotlin.LaboratoriesKt" />
-        <item itemvalue="Kotlin.PrintingDepartmentKt" />
-        <item itemvalue="Gradle.aoc2025 [solveToday]" />
         <item itemvalue="Gradle.aoc2025 [solve2025]" />
+        <item itemvalue="Kotlin.TrashCompactorKt" />
+        <item itemvalue="Kotlin.PrintingDepartmentKt" />
+        <item itemvalue="Gradle.aoc2025 [build]" />
+        <item itemvalue="Gradle.aoc2025 [solveToday]" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +291,7 @@
       <workItem from="1764749331289" duration="66787000" />
       <workItem from="1764938397629" duration="23707000" />
       <workItem from="1765027780810" duration="14816000" />
-      <workItem from="1765108426814" duration="29424000" />
+      <workItem from="1765108426814" duration="49028000" />
     </task>
     <task id="LOCAL-00001" summary="Day 1 - Read Input From File">
       <option name="closed" value="true" />
@@ -434,7 +469,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765117437751</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Day 7 - Part 2">
+      <option name="closed" value="true" />
+      <created>1765143999673</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1765143999673</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Various Other Stuff">
+      <option name="closed" value="true" />
+      <created>1765144034961</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1765144034961</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -458,7 +509,9 @@
     <MESSAGE value="Day 6 - Part 2" />
     <MESSAGE value="Day 6 - Part 1 &amp; 2" />
     <MESSAGE value="Day 7 - Part 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 7 - Part 1" />
+    <MESSAGE value="Day 7 - Part 2" />
+    <MESSAGE value="Various Other Stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Various Other Stuff" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

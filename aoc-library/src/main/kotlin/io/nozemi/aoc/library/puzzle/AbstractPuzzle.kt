@@ -120,6 +120,10 @@ abstract class AbstractPuzzle<T> {
 
         parsedInputs.forEach { input ->
             solutions.forEachIndexed { index, solution ->
+                repeat(0) {
+                    solution.invoke(input.data)
+                }
+
                 input.answers[index] = measureTimedValue { solution.invoke(input.data).toString().toLong() }
             }
         }
