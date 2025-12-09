@@ -49,7 +49,7 @@ class Playground(
         return a.x * b.x
     }
 
-    fun List<Edge>.merge(disjointSet: ForestDisjointSet<Vector3>): List<Pair<Vector3, Vector3>> {
+    private fun List<Edge>.merge(disjointSet: ForestDisjointSet<Vector3>): List<Pair<Vector3, Vector3>> {
         val connectedEdges = mutableSetOf<Pair<Vector3, Vector3>>()
 
         this.forEach { edge ->
@@ -72,7 +72,7 @@ class Playground(
     private val List<Vector3>.edges get() = buildList {
         for ((idx, a) in this@edges.withIndex()) {
             for (b in this@edges.subList(0, idx)) {
-                add(Edge(a, b, a.euclideanDistanceTo(b)))
+                add(Edge(a, b, a.euclideanDistance(b)))
             }
         }
 

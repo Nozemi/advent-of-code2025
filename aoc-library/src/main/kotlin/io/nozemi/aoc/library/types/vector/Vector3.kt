@@ -48,15 +48,13 @@ data class Vector3(
         z = max(z, other.z) - min(z, other.z)
     )
 
-    fun distanceSquared(other: Vector3): Long {
-        val dx = x - other.x
-        val dy = y - other.y
-        val dz = z - other.z
+    fun euclideanDistanceSquared(other: Vector3): Long {
+        val (dx, dy, dz) = distanceTo(other)
 
         return dx * dx + dy * dy + dz * dz
     }
 
-    fun euclideanDistanceTo(other: Vector3) = sqrt(1.0 * distanceSquared(other)).toLong()
+    fun euclideanDistance(other: Vector3) = sqrt(1.0 * euclideanDistanceSquared(other)).toLong()
 
     override fun toString() = "(x=$x, y=$y, z=$z)"
 }

@@ -5,6 +5,7 @@ package io.nozemi.aoc.library.types.vector
 import io.nozemi.aoc.library.types.Direction2D
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 data class Vector2(
     val x: Long,
@@ -25,9 +26,18 @@ data class Vector2(
     operator fun div(other: Vector2) = Vector2(x / other.x, y / other.y)
     operator fun div(value: Long) = Vector2(x / value, y / value)
 
-    fun distanceFrom(other: Vector2) = Vector2(
-        max(x, other.x) - min(x, other.x), max(y, other.y) - min(y, other.y)
+    fun distanceTo(other: Vector2) = Vector2(
+        x = max(x, other.x) - min(x, other.x),
+        y = max(y, other.y) - min(y, other.y)
     )
+
+    fun euclideanDistanceSquared(other: Vector2): Long {
+        val (dx, dy) = distanceTo(other)
+
+        return dx * dx + dy * dy
+    }
+
+    fun euclideanDistance(other: Vector2) = sqrt(1.0 * euclideanDistanceSquared(other)).toLong()
 
     override fun toString() = "(x=$x, y=$y)"
 }
