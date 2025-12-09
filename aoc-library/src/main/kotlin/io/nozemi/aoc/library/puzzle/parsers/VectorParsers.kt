@@ -1,16 +1,15 @@
 package io.nozemi.aoc.library.puzzle.parsers
 
 import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
-import io.nozemi.aoc.library.types.vector.IVector3
-import io.nozemi.aoc.library.types.vector.Vector3Int
+import io.nozemi.aoc.library.types.vector.Vector3
 import java.util.stream.Stream
 
-class Vector3IntParser : AbstractPuzzleParser<List<IVector3<Int>>>() {
+class Vector3Parser : AbstractPuzzleParser<List<Vector3>>() {
 
-    override fun parse(input: Stream<String>): List<IVector3<Int>> =
+    override fun parse(input: Stream<String>): List<Vector3> =
         input.map { raw ->
-            val (x, y, z) = raw.split(",").map { it.toInt() }
+            val (x, y, z) = raw.split(",").map { it.toLong() }
 
-            Vector3Int(x, y, z)
+            Vector3(x, y, z)
         }.toList()
 }

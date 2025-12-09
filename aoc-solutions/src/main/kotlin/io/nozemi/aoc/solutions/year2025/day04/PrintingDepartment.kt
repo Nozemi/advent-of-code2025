@@ -5,7 +5,7 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
 import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
-import io.nozemi.aoc.library.types.vector.IVector2
+import io.nozemi.aoc.library.types.vector.Vector2
 
 class PrintingDepartment(
     override val parser: AbstractPuzzleParser<MatrixDynamicChar> = CharMatrixParser()
@@ -22,7 +22,7 @@ class PrintingDepartment(
 
     private fun part2(matrix: MatrixDynamicChar): Long {
         var matrix = matrix
-        val removedRolls = mutableListOf<IVector2<Int>>()
+        val removedRolls = mutableListOf<Vector2>()
 
         var remove = true
         while (remove) {
@@ -41,7 +41,7 @@ class PrintingDepartment(
         return removedRolls.size.toLong()
     }
 
-    private fun accessibleRolls(matrix: MatrixDynamicChar): List<IVector2<Int>> {
+    private fun accessibleRolls(matrix: MatrixDynamicChar): List<Vector2> {
         val accessibleRolls = matrix.map { cell ->
             if (cell.value == '.')
                 return@map null

@@ -5,8 +5,7 @@ import io.nozemi.aoc.library.puzzle.AbstractPuzzleParser
 import io.nozemi.aoc.library.puzzle.PuzzleSolutions
 import io.nozemi.aoc.library.puzzle.parsers.CharMatrixParser
 import io.nozemi.aoc.library.types.matrix.MatrixDynamicChar
-import io.nozemi.aoc.library.types.vector.IVector2
-import io.nozemi.aoc.library.types.vector.Vector2Int
+import io.nozemi.aoc.library.types.vector.Vector2
 
 class Laboratories(
     override val parser: AbstractPuzzleParser<MatrixDynamicChar> = CharMatrixParser()
@@ -23,7 +22,7 @@ class Laboratories(
     private fun part2(matrix: MatrixDynamicChar): Long =
         matrix.beamPaths(matrix.first { it.value == beamStart }.pos)
 
-    private fun MatrixDynamicChar.beamPaths(start: IVector2<Int>): Long {
+    private fun MatrixDynamicChar.beamPaths(start: Vector2): Long {
         val cache = Array(this.rows) { LongArray(this.cols) }
 
         for (x in 0 until this.cols) {
@@ -47,14 +46,14 @@ class Laboratories(
             }
         }
 
-        return cache[start.y][start.x]
+        return cache[start]
     }
 
     private fun MatrixDynamicChar.beamSplits(
-        currentRow: Int? = null,
-        columns: List<Int> = listOf(),
-        splitters: List<IVector2<Int>> = listOf(),
-    ): List<IVector2<Int>> {
+        currentRow: Long? = null,
+        columns: List<Long> = listOf(),
+        splitters: List<Vector2> = listOf(),
+    ): List<Vector2> {
         if (currentRow == null) {
             val start = this.first { it.value == beamStart }.pos
 
@@ -65,7 +64,7 @@ class Laboratories(
             )
         }
 
-        val currentRow: Int = currentRow
+        val currentRow: Long = currentRow
 
         if (currentRow >= this.rows)
             return splitters
@@ -85,6 +84,8 @@ class Laboratories(
 
         return beamSplits(currentRow + 1, columns, splitters + rowSplitters)
     }
+
+    private operator fun Array<LongArray>.get(pos: Vector2) = this[pos.y.toInt()][pos.x.toInt()]
 
     private val emptyTile = '.'
     private val beamStart = 'S'

@@ -1,8 +1,7 @@
 package io.nozemi.aoc.library.types.matrix
 
 import io.nozemi.aoc.library.types.matrix.interfaces.IMatrix
-import io.nozemi.aoc.library.types.vector.IVector2
-import io.nozemi.aoc.library.types.vector.Vector2Int
+import io.nozemi.aoc.library.types.vector.Vector2
 
 open class MatrixDynamicInt(
     private val values: Array<IntArray>
@@ -12,22 +11,22 @@ open class MatrixDynamicInt(
 
     override val cells: List<MatrixCell<Int>>
         get() = values.flatMapIndexed { y, columns ->
-            columns.mapIndexed { x, value -> MatrixCell(Vector2Int(x, y), value) }
+            columns.mapIndexed { x, value -> MatrixCell(Vector2(x, y), value) }
         }
 
     override val distinctValues: List<Int>
         get() = values.flatMap { it.distinct() }
 
-    override fun getOrNull(pos: IVector2<Int>): Int? {
+    override fun getOrNull(pos: Vector2): Int? {
         if (!isWithinBounds(pos))
             return null
 
-        return values[pos.y][pos.x]
+        return values[pos]
     }
 
-    override fun set(pos: IVector2<Int>, value: Int): MatrixDynamicInt {
+    override fun set(pos: Vector2, value: Int): MatrixDynamicInt {
         val newValues = values.copyOf()
-        newValues[pos.y][pos.x] = value
+        newValues[pos] = value
 
         return MatrixDynamicInt(newValues)
     }
@@ -46,8 +45,13 @@ open class MatrixDynamicInt(
     override fun copyOf() = MatrixDynamicInt(values.copyOf())
 
     override fun iterator() = values.flatMapIndexed { y, row ->
-        row.mapIndexed { x, value -> MatrixCell(Vector2Int(x, y), value) }
+        row.mapIndexed { x, value -> MatrixCell(Vector2(x, y), value) }
     }.iterator()
+
+    private operator fun Array<IntArray>.get(pos: Vector2) = this[pos.y.toInt()][pos.x.toInt()]
+    private operator fun Array<IntArray>.set(pos: Vector2, value: Int) {
+        this[pos.y.toInt()][pos.x.toInt()] = value
+    }
 
     companion object {
 

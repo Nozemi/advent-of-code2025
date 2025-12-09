@@ -4,40 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b6ffdf0-c8e3-4f59-bfcf-5a32aa532c32" name="Changes" comment="Various Other Stuff">
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/extensions/VectorExtensions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/VectorParsers.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction3D.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicChar.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicDouble.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicInt.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixFixed2DDouble.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixFixed2DInt.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IMatrix.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector2.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector3.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Int.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Long.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Int.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Long.kt" afterDir="false" />
+    <list default="true" id="0b6ffdf0-c8e3-4f59-bfcf-5a32aa532c32" name="Changes" comment="Refactored Matrix &amp; Vector Implementation">
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/helpers/GeneralHelpers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/disjointset/ForestDisjointSet.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/disjointset/IDisjointSet.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day08/Playground.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/inputs/year2025/day8.example.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/inputs/year2025/day8.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ascii/AsciiFont.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/cli/ascii/AsciiFont.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/AbstractPuzzle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/AbstractPuzzle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/MatrixParsers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/MatrixParsers.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction2D.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/FixedDouble2DMatrix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/FixedInt2DMatrix.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/extensions/VectorExtensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/extensions/VectorExtensions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/VectorParsers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/puzzle/parsers/VectorParsers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction2D.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction2D.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction3D.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/Direction3D.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixCell.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixCell.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableCharMatrix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/VariableIntMatrix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IFixedSizeMatrix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IVariableSizeMatrix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vectors/Vector2.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicDouble.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicDouble.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicInt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/MatrixDynamicInt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IMatrix.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/matrix/interfaces/IMatrix.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector2.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/IVector3.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Int.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2Long.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Int.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3Long.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-library/src/main/kotlin/io/nozemi/aoc/library/types/vector/Vector3.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day04/PrintingDepartment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day04/PrintingDepartment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day06/TrashCompactor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day06/TrashCompactor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day07/Laboratories.kt" beforeDir="false" afterPath="$PROJECT_DIR$/aoc-solutions/src/main/kotlin/io/nozemi/aoc/solutions/year2025/day07/Laboratories.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,12 +64,6 @@
                 <item name="aoc2025" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="advent-of-code" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="aoc2025" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -126,6 +111,7 @@
     "Gradle.aoc2025 [solve2025].executor": "Run",
     "Gradle.aoc2025 [solveToday].executor": "Run",
     "Gradle.aoc2025:aoc-library [:aoc-library:io.nozemi.aoc.library.AsciiFontKt.main()].executor": "Run",
+    "Gradle.aoc2025:aoc-library [:aoc-library:io.nozemi.aoc.library.types.disjointset.DisjointSetKt.main()].executor": "Run",
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.ApplicationKt.main()].executor": "Run",
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.ChallengeSelectScreenKt.main()].executor": "Run",
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.solutions.year2024.day01.HistorianHysteriaKt.main()].executor": "Run",
@@ -139,6 +125,7 @@
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.solutions.year2025.day06.TrashCompactorKt.main()].executor": "Run",
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.solutions.year2025.day07.LaboratoriesKt.main()].executor": "Run",
     "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.solutions.year2025.day07.StuffKt.main()].executor": "Run",
+    "Gradle.aoc2025:aoc-solutions [:aoc-solutions:io.nozemi.aoc.solutions.year2025.day08.PlaygroundKt.main()].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -157,46 +144,26 @@
       <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\data\inputs\year2025" />
+      <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\data\inputs" />
       <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\data" />
       <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025" />
       <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\aoc-solutions" />
-      <recent name="C:\Users\Nomputer\IdeaProjects\aoc2025\aoc-solutions\src\main\resources" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="io.nozemi.aoc.library.types" />
       <recent name="io.nozemi.aoc.library.types.vectors" />
       <recent name="io.nozemi.aoc.library.types.matrix" />
     </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="io.nozemi.aoc.library.types.disjointset" />
       <recent name="io.nozemi.aoc.library.types.matrix" />
       <recent name="io.nozemi.aoc.library.types.matrix.interfaces" />
       <recent name="io.nozemi.aoc.application" />
       <recent name="io.nozemi.aoc.library.cli.ascii" />
-      <recent name="io.nozemi.aoc.library.cli.ansi" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.aoc2025 [solve2025]">
-    <configuration name="aoc2025 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Kotlin.PlaygroundKt">
     <configuration name="aoc2025 [solve2025]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -219,27 +186,19 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="aoc2025 [solveToday]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="solveToday" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
+    <configuration name="DisjointSetKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.library.types.disjointset.DisjointSetKt" />
+      <module name="aoc2025.aoc-library.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlaygroundKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day08.PlaygroundKt" />
+      <module name="aoc2025.aoc-solutions.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="PrintingDepartmentKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.nozemi.aoc.solutions.year2025.day04.PrintingDepartmentKt" />
@@ -256,19 +215,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.aoc2025 [build]" />
       <item itemvalue="Gradle.aoc2025 [solve2025]" />
-      <item itemvalue="Gradle.aoc2025 [solveToday]" />
+      <item itemvalue="Kotlin.DisjointSetKt" />
+      <item itemvalue="Kotlin.PlaygroundKt" />
       <item itemvalue="Kotlin.PrintingDepartmentKt" />
       <item itemvalue="Kotlin.TrashCompactorKt" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.DisjointSetKt" />
+        <item itemvalue="Kotlin.PlaygroundKt" />
         <item itemvalue="Gradle.aoc2025 [solve2025]" />
         <item itemvalue="Kotlin.TrashCompactorKt" />
         <item itemvalue="Kotlin.PrintingDepartmentKt" />
-        <item itemvalue="Gradle.aoc2025 [build]" />
-        <item itemvalue="Gradle.aoc2025 [solveToday]" />
       </list>
     </recent_temporary>
   </component>
@@ -291,7 +250,8 @@
       <workItem from="1764749331289" duration="66787000" />
       <workItem from="1764938397629" duration="23707000" />
       <workItem from="1765027780810" duration="14816000" />
-      <workItem from="1765108426814" duration="49028000" />
+      <workItem from="1765108426814" duration="72801000" />
+      <workItem from="1765234338347" duration="9265000" />
     </task>
     <task id="LOCAL-00001" summary="Day 1 - Read Input From File">
       <option name="closed" value="true" />
@@ -485,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765144034961</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Refactored Matrix &amp; Vector Implementation">
+      <option name="closed" value="true" />
+      <created>1765196573795</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1765196573795</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -511,7 +479,8 @@
     <MESSAGE value="Day 7 - Part 1" />
     <MESSAGE value="Day 7 - Part 2" />
     <MESSAGE value="Various Other Stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Various Other Stuff" />
+    <MESSAGE value="Refactored Matrix &amp; Vector Implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored Matrix &amp; Vector Implementation" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

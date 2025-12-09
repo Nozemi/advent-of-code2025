@@ -95,4 +95,6 @@ class AsciiFont(file: Path) {
 
         return AsciiArtText(rendered.joinToString("\n"))
     }
+
+    private operator fun <T> MutableList<T>.get(index: Long) = this[index.toInt()]
 }

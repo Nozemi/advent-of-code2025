@@ -2,15 +2,13 @@
 
 package io.nozemi.aoc.library.types
 
-import io.nozemi.aoc.library.extensions.asLong
-import io.nozemi.aoc.library.types.vector.IVector2
-import io.nozemi.aoc.library.types.vector.Vector2Int
+import io.nozemi.aoc.library.types.vector.Vector2
 
-enum class Direction2D(val value: IVector2<Int>) {
-    NORTH(Vector2Int(0, -1)),
-    SOUTH(Vector2Int(0, 1)),
-    EAST(Vector2Int(1, 0)),
-    WEST(Vector2Int(-1, 0)),
+enum class Direction2D(val value: Vector2) {
+    NORTH(Vector2(0, -1)),
+    SOUTH(Vector2(0, 1)),
+    EAST(Vector2(1, 0)),
+    WEST(Vector2(-1, 0)),
 
     NORTH_WEST(NORTH.value + WEST.value),
     NORTH_EAST(NORTH.value + EAST.value),
@@ -20,8 +18,6 @@ enum class Direction2D(val value: IVector2<Int>) {
 
     val x = value.x
     val y = value.y
-
-    val asLong get() = value.asLong
 
     companion object {
 

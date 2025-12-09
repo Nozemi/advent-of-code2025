@@ -1,8 +1,7 @@
 package io.nozemi.aoc.library.types.matrix
 
 import io.nozemi.aoc.library.types.matrix.interfaces.IMatrix
-import io.nozemi.aoc.library.types.vector.IVector2
-import io.nozemi.aoc.library.types.vector.Vector2Int
+import io.nozemi.aoc.library.types.vector.Vector2
 
 open class MatrixDynamicChar(
     private val values: Array<CharArray>
@@ -21,22 +20,22 @@ open class MatrixDynamicChar(
 
     override val cells: List<MatrixCell<Char>>
         get() = values.flatMapIndexed { y, columns ->
-            columns.mapIndexed { x, value -> MatrixCell(Vector2Int(x, y), value) }
+            columns.mapIndexed { x, value -> MatrixCell(Vector2(x, y), value) }
         }
 
     override val distinctValues: List<Char>
         get() = values.flatMap { it.distinct() }
 
-    override fun getOrNull(pos: IVector2<Int>): Char? {
+    override fun getOrNull(pos: Vector2): Char? {
         if (!isWithinBounds(pos))
             return null
 
-        return values[pos.y][pos.x]
+        return values[pos]
     }
 
-    override fun set(pos: IVector2<Int>, value: Char): MatrixDynamicChar {
+    override fun set(pos: Vector2, value: Char): MatrixDynamicChar {
         val newValues = values.copyOf()
-        newValues[pos.y][pos.x] = value
+        newValues[pos] = value
 
         return MatrixDynamicChar(newValues)
     }
@@ -55,11 +54,16 @@ open class MatrixDynamicChar(
     override fun copyOf() = MatrixDynamicChar(values.copyOf())
 
     override fun iterator() = values.flatMapIndexed { y, row ->
-        row.mapIndexed { x, value -> MatrixCell(Vector2Int(x, y), value) }
+        row.mapIndexed { x, value -> MatrixCell(Vector2(x, y), value) }
     }.iterator()
 
     override fun toString() = values.joinToString("\n") {
         it.joinToString("")
+    }
+
+    private operator fun Array<CharArray>.get(pos: Vector2) = this[pos.y.toInt()][pos.x.toInt()]
+    private operator fun Array<CharArray>.set(pos: Vector2, value: Char) {
+        this[pos.y.toInt()][pos.x.toInt()] = value
     }
 
     companion object {
