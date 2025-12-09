@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.nozemi.aoc.library.types.disjointset
 
 /**
@@ -5,6 +7,11 @@ package io.nozemi.aoc.library.types.disjointset
  */
 class ForestDisjointSet<T> : IDisjointSet<T> {
     private val nodes = mutableMapOf<T, Node<T>>()
+
+    constructor()
+    constructor(items: List<T>) {
+        addAll(items)
+    }
 
     override val elements: Int
         get() = nodes.size

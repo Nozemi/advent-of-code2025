@@ -31,30 +31,10 @@ class Playground(
     )
 
     private fun part1(points: List<Vector3>): Int {
-        val disjointSet = ForestDisjointSet<Vector3>()
-        for (v in points) {
-            disjointSet.add(v)
-        }
+        val disjointSet = ForestDisjointSet(points)
 
-        val edges = buildList {
-            for ((idx, a) in points.withIndex()) {
-                for (b in points.subList(0, idx)) {
-                    add(Edge(a, b, a.euclideanDistanceTo(b)))
-                }
-            }
-
-            sortBy(Edge::distance)
-        }.take(points.connections)
-
-        for (connection in edges) {
-            val a = disjointSet[connection.a]
-            val b = disjointSet[connection.b]
-
-            if (a == null || b == null)
-                continue
-
-            disjointSet.union(a, b)
-        }
+        points.edges.take(points.connections)
+            .merge(disjointSet)
 
         return disjointSet.map { it.size }
             .sortedDescending()
@@ -63,34 +43,40 @@ class Playground(
     }
 
     private fun part2(points: List<Vector3>): Long {
-        val disjointSet = ForestDisjointSet<Vector3>()
-        disjointSet.addAll(points)
+        val disjointSet = ForestDisjointSet(points)
+        val (a, b) = points.edges.merge(disjointSet).last()
 
-        val edges = buildList {
-            for ((idx, a) in points.withIndex()) {
-                for (b in points.subList(0, idx)) {
-                    add(Edge(a, b, a.euclideanDistanceTo(b)))
-                }
-            }
+        return a.x * b.x
+    }
 
-            sortBy(Edge::distance)
-        }
+    fun List<Edge>.merge(disjointSet: ForestDisjointSet<Vector3>): List<Pair<Vector3, Vector3>> {
+        val connectedEdges = mutableSetOf<Pair<Vector3, Vector3>>()
 
-        var lastConnection = Pair(Vector3(0, 0, 0), Vector3(0, 0, 0))
-        for (connection in edges) {
-            val a = disjointSet[connection.a]!!
-            val b = disjointSet[connection.b]!!
+        this.forEach { edge ->
+            val a = disjointSet[edge.a]
+            val b = disjointSet[edge.b]
+
+            if (a == null || b == null)
+                return@forEach
 
             disjointSet.union(a, b)
-
-            lastConnection = Pair(connection.a, connection.b)
+            connectedEdges.add(Pair(edge.a, edge.b))
 
             if (disjointSet.partitions == 1)
-                break
+                return connectedEdges.toList()
         }
 
-        val (a, b) = lastConnection
-        return a.x * b.x
+        return connectedEdges.toList()
+    }
+
+    private val List<Vector3>.edges get() = buildList {
+        for ((idx, a) in this@edges.withIndex()) {
+            for (b in this@edges.subList(0, idx)) {
+                add(Edge(a, b, a.euclideanDistanceTo(b)))
+            }
+        }
+
+        sortBy(Edge::distance)
     }
 
     private val List<Vector3>.connections
